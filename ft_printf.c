@@ -15,6 +15,7 @@ int		ft_printf(const char *format, ...)
 	spe_c		spec;
 	
 	ret = 0;
+	ret_tab = NULL;
 	i = 0;
 	if (format == NULL)
 		return (-1);
@@ -48,6 +49,7 @@ int		ft_printf(const char *format, ...)
 	//			printf("test des boucles 2.2\n");
 				tmp = ft_strncatpf(tmp, wiit.tab[i], ret - ft_strlen(wiit.tab[i]), ft_strlen(wiit.tab[i]));
 	//			printf("test des boucles 2.3 tmp est [%s]\n", tmp);
+				free(ret_tab);
 				ret_tab = tmp;
 	//			printf("test des boucles 2.4\n");
 //				free(wiit.tab[i]);
@@ -108,6 +110,7 @@ int		ft_printf(const char *format, ...)
 //					printf("test des boucles 6.2\n");
 					tmp = ft_strncatpf(tmp, cur_arg, ret - ft_strlen(cur_arg), ft_strlen(cur_arg));
 //					printf("test des boucles 6.3 tmp est [%s]\n", tmp);
+					free(ret_tab);
 					ret_tab = tmp;
 				//	free(tmp);
 				}
@@ -177,6 +180,7 @@ int		ft_printf(const char *format, ...)
 //					printf("test des boucles 8.2\n");
 					tmp = ft_strncatpf(tmp, spec.tab, ret - spec.len, spec.len);
 //					printf("test des boucles 8.3 tmp est [%s]\n", tmp);
+					free(ret_tab);
 					ret_tab = tmp;
 				}
 //				if(flag.width > 1)
@@ -196,7 +200,7 @@ int		ft_printf(const char *format, ...)
 				if(!ret_tab)
 				{
 	//			printf("9.14 l'argument est [%s]\n", ret_tab);
-					if(flag.conv_num == 0)
+					if(flag.conv_num == 0 || cur_arg == NULL)
 						ret_tab = NULL;
 					else
 						ret_tab = ft_strdup(cur_arg);
@@ -214,6 +218,7 @@ int		ft_printf(const char *format, ...)
 //					printf("test des boucles 9.2\n");
 					tmp = ft_strncatpf(tmp, cur_arg, ret - ft_strlen(cur_arg), ft_strlen(cur_arg));
 //					printf("test des boucles 9.3 tmp est [%s]\n", tmp);
+					free(ret_tab);
 					ret_tab = tmp;
 			//		free(tmp);
 				}
